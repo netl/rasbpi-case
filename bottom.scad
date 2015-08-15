@@ -1,7 +1,7 @@
-depth=7;
+depth=4;
 thickness=2;
 radius=3.5;
-drill=2.75;
+drill=2;
 height=49;
 width=58;
 difference()
@@ -9,15 +9,15 @@ difference()
     union()
     {
         //add the mounting brackets
-            cylinder(depth,radius,radius);
+            cylinder(depth,radius,radius,$fn = 16);
         translate([0,height,0])
         {
-            cylinder(depth,radius,radius);
+            cylinder(depth,radius,radius,$fn = 16);
             translate([width,0,0])
-                cylinder(depth,radius,radius);
+                cylinder(depth,radius,radius,$fn = 16);
         }
         translate([width,0,0])
-            cylinder(depth,radius,radius);
+            cylinder(depth,radius,radius,$fn = 16);
         
         //add the walls
         translate([thickness-radius,thickness-radius,0])
@@ -33,14 +33,15 @@ difference()
     }
     
     //add the drill holes
-    union()
-    {
-        cylinder(depth,drill,drill);
-        translate([0,height,0])
-            cylinder(depth,drill,drill);
-        translate([width,height,0])
-            cylinder(depth,drill,drill);
-        translate([width,0,0])
-            cylinder(depth,drill,drill);
-    }
+    cylinder(depth,drill,drill,$fn = 16);
+    translate([0,height,0])
+        cylinder(depth,drill,drill,$fn = 16);
+    translate([width,height,0])
+        cylinder(depth,drill,drill,$fn = 16);
+    translate([width,0,0])
+        cylinder(depth,drill,drill,$fn = 16);
+    
+    //add slot for microsd
+    translate([-radius,21-radius,depth-2])
+        cube([16,15,3]);
 }
