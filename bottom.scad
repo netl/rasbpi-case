@@ -1,7 +1,7 @@
 depth=4;
 thickness=2;
 radius=3.5;
-drill=2;
+drill=1.25;
 height=49;
 width=58;
 difference()
