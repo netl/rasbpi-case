@@ -4,6 +4,8 @@ drill=0.95;
 height=49;
 width=58;
 depth=thickness+2;
+countersink = false;
+$fn = 64; //number of faces on a circle
 
 difference()
 {
@@ -24,23 +26,35 @@ difference()
         }
         
         //add the mounting brackets
-        cylinder(depth,radius,radius,$fn = 64);
+        cylinder(depth,radius,radius);
         translate([0,height,0])
-            cylinder(depth,radius,radius,$fn = 64);
+            cylinder(depth,radius,radius);
         translate([width,height,0])
-            cylinder(depth,radius,radius,$fn = 64);
+            cylinder(depth,radius,radius);
         translate([width,0,0])
-            cylinder(depth,radius,radius,$fn = 64);
+            cylinder(depth,radius,radius);
     }
 
     //drill holes
-    cylinder(depth,drill,drill,$fn = 64);
+    cylinder(depth,drill,drill);
     translate([0,height,0])
-        cylinder(depth,drill,drill,$fn = 64);
+        cylinder(depth,drill,drill);
     translate([width,height,0])
-        cylinder(depth,drill,drill,$fn = 64);
+        cylinder(depth,drill,drill);
     translate([width,0,0])
-        cylinder(depth,drill,drill,$fn = 64);
+        cylinder(depth,drill,drill);
+    
+    //countersink
+    if(countersink==true)
+    {
+        cylinder(drill,drill*2,drill);
+        translate([0,height,0])
+            cylinder(drill,drill*2,drill);
+        translate([width,height,0])
+            cylinder(drill,drill*2,drill);
+        translate([width,0,0])
+            cylinder(drill,drill*2,drill);
+    }    
     
     //add slot for microsd
     translate([-radius,21-radius,depth-2])
