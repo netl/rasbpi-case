@@ -1,10 +1,10 @@
 thickness=0.8;
 radius=3.5;
-drill=0.85;
+drill=1.25;
 height=49;
 width=58;
-depth=thickness+2.5;
-countersink = false;
+depth=thickness+7;
+countersink = true;
 $fn = 64; //number of faces on a circle
 
 difference()
@@ -56,7 +56,33 @@ difference()
             cylinder(drill,drill*2,drill);
     }    
     
-    //add slot for microsd
-    translate([-radius,21-radius,depth-2])
-        cube([16,15,2]);
+    //add slot for usb port
+    translate([-radius,24-radius,depth-7])
+        cube([12,15,7]);
+    
+    //add slot for audio jack
+    translate([7-radius,-radius,depth-7])
+        cube([9,13,7]);
+    
+    //add slot for camera header
+    translate([17-radius,-radius,depth-7])
+        cube([5,23,7]);
+    
+    //add slot for hdmi
+    translate([25-radius,-radius,depth-7])
+        cube([17,11,7]);
+    
+    //add slot for power
+    translate([49-radius,-radius,depth-3])
+        cube([9,6,3]);
+    
+    
+    //add slot for status leds
+    translate([width+radius-2,43-radius,depth-2])
+        cube([2,6,2]);
+        
+    //add slot for connector
+    translate([6.5-radius,49-radius,0])
+        cube([52,7,depth]);
+    
 }
