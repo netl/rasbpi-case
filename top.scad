@@ -57,19 +57,19 @@ difference()
     }    
     
     //add slot for usb port
-    translate([-radius,24-radius,depth-7])
-        cube([12,15,7]);
+    translate([-radius,24-radius,depth-8])
+        cube([12,15,8]);
     
     //add slot for audio jack
     translate([7-radius,-radius,depth-7])
         cube([9,13,7]);
     
     //add slot for camera header
-    translate([17-radius,-radius,depth-7])
-        cube([5,23,7]);
+    translate([17-radius,-radius,depth-6])
+        cube([5,23,6]);
     
     //add slot for hdmi
-    translate([25-radius,-radius,depth-7])
+    translate([24.5radius,-radius,depth-7])
         cube([16,11,7]);
     
     //add slot for usb power
