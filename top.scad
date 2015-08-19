@@ -1,9 +1,9 @@
-thickness=0.8;
+thickness=1.6;
 radius=3.5;
 drill=1.25;
 height=49;
 width=58;
-depth=thickness+7;
+depth=thickness+8;
 countersink = true;
 $fn = 64; //number of faces on a circle
 
@@ -21,7 +21,7 @@ difference()
             translate([0,-radius,0])
                 cube([width,height+2*radius,depth]);
             }
-            translate([-radius+thickness,-radius+thickness,thickness])
+            translate([-radius+thickness,-radius+thickness,thickness+3])	//3mm filler on "top"
                 cube([width+2*(radius-thickness),height+2*(radius-thickness),depth]);
         }
         
@@ -70,19 +70,22 @@ difference()
     
     //add slot for hdmi
     translate([25-radius,-radius,depth-7])
-        cube([17,11,7]);
+        cube([16,11,7]);
     
-    //add slot for power
+    //add slot for usb power
     translate([49-radius,-radius,depth-3])
-        cube([9,6,3]);
-    
+        cube([10,6,3]);
     
     //add slot for status leds
-    translate([width+radius-2,43-radius,depth-2])
-        cube([2,6,2]);
+    translate([width+radius-2,43-radius,depth-1])
+        cube([2,7,1]);
         
     //add slot for connector
     translate([6.5-radius,49-radius,0])
         cube([52,7,depth]);
+
+	//add slot for display header
+    translate([width+radius-6,-radius+16,depth-7])
+        cube([5,24,7]);
     
 }

@@ -1,4 +1,4 @@
-thickness=0.8;
+thickness=1.6;
 radius=3.5;
 drill=0.85;
 height=49;
