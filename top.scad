@@ -1,6 +1,6 @@
 thickness=1.6;
 radius=3.5;
-drill=1.25;
+drill=2;
 height=49;
 width=58;
 depth=thickness+8;
@@ -69,7 +69,7 @@ difference()
         cube([5,23,6]);
     
     //add slot for hdmi
-    translate([24.5radius,-radius,depth-7])
+    translate([24.5-radius,-radius,depth-7])
         cube([16,11,7]);
     
     //add slot for usb power
