@@ -1,11 +1,14 @@
 thickness=1.6;
 radius=3.5;
-drill=0.85;
+drill=1.25;
 height=49;
 width=85;
 depth=thickness+2.5;
 countersink = false;
+vesa=true;
 $fn = 64; //number of faces on a circle
+
+
 
 difference()
 {
@@ -14,17 +17,21 @@ difference()
         //create walls
         difference()
         {
+
             union()
             {
-            translate([-radius,0,0])
-                cube([width+2*radius,height,depth]);
-            translate([0,-radius,0])
-                cube([width,height+2*radius,depth]);
-            translate([width,height,0])
-                cylinder(depth,radius,radius);
-            translate([width,0,0])
-                cylinder(depth,radius,radius);
-            }
+                if(vesa==true)
+                    translate([width/2,height/2,0])
+                        import("vesa.stl");
+                translate([-radius,0,0])
+                    cube([width+2*radius,height,depth]);
+                translate([0,-radius,0])
+                    cube([width,height+2*radius,depth]);
+                translate([width,height,0])
+                    cylinder(depth,radius,radius);
+                translate([width,0,0])
+                    cylinder(depth,radius,radius);
+                }
             translate([-radius+thickness,-radius+thickness,thickness])
                 cube([width+2*(radius-thickness),height+2*(radius-thickness),depth]);
         }
