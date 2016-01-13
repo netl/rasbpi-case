@@ -1,16 +1,20 @@
 countersink = false;     //countersink screwmount?
-vesa=true;              //vesa mount? configure in vesa.scad and export as stl
-modelB=false;           //raspi model B?
-thickness=1.6;          //wall thickness
+vesa=false;              //vesa mount? configure in vesa.scad and export as stl
+modelB=true;           //raspi model B?
+zipties=false;
+thickness=1.2;          //wall thickness
 radius=3.5;             //screwmount radius
 drill=1.25;              //screwmount drill
 
 
 height=49;
-width= modelB ? 85 : 58;
+width= modelB ? 78 : 58;
 depth=thickness+2.5;
 $fn = 64; //number of faces on a circle
-
+ translate([width+radius-2*thickness,-radius+thickness,0])
+                        cube([thickness,thickness,depth]);
+  translate([width+radius-2*thickness,height+radius-2*thickness,0])
+                        cube([thickness,thickness,depth]);
 difference()
 {
     union()
@@ -23,7 +27,7 @@ difference()
             {
                 if(vesa)
                     translate([width/2,height/2,0])
-                        import("vesa.stl");
+                        import("../stl/vesa.stl");
                 translate([-radius,0,0])
                     cube([width+2*radius,height,depth]);
                 translate([0,-radius,0])
@@ -35,6 +39,19 @@ difference()
                 }
             translate([-radius+thickness,-radius+thickness,thickness])
                 cube([width+2*(radius-thickness),height+2*(radius-thickness),depth]);
+                
+            //ziptie holes
+            if(zipties)
+            translate([width/2,height/2,0])
+            {
+                translate([-15,-15,0])
+                    cube([30,30,10]);
+                for(x = [0 : 90 : 270])
+                    rotate([0,0,x])
+                        translate([height/2,-15,0])
+                            cube([6,30,5]);
+            }
+
         }
         
         //add the mounting brackets
@@ -45,6 +62,8 @@ difference()
             cylinder(depth,radius,radius);
         translate([58,0,0])
             cylinder(depth,radius,radius);
+        
+
     }
 
     //drill holes
