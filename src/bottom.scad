@@ -3,7 +3,7 @@ vesa=false; //vesa mount? configure in vesa.scad and export as stl
 modelB=true; //raspi model B?
 zipties=false; //add holes for zipties
 thickness=1.2; //wall thickness
-drill=1.25; //screwmount drill
+drill=1; //screwmount drill
 
 //these shouldn't need changing
 radius=3.5; //screwmount radius
