@@ -96,12 +96,12 @@ difference()
         cube([9,13,7]);
     
     //add slot for hdmi
-    translate([17.5+radius,height-11+radius,depth-7])
-        cube([16,11,7]);
+    translate([17.5+radius,height-12+radius,depth-7])
+        cube([16,12,7]);
     
     //add slot for usb power
     translate([6-radius,height-6-(-radius),depth-3])
-        cube([8,6,3]);
+        cube([10,6,3]);
     
     //add slot for status leds
     translate([-radius,height-7-(43-radius),depth-1])
