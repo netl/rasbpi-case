@@ -1,10 +1,11 @@
 modelB=true; //raspi model B?
-countersink = true; //countersink screwmount?
+countersink = false; //countersink screwmount?
+hollow = false; //hollow out to save material and improve cooling?
 thickness=1.2; //wall thickness
-drill=1.25; //screwmount drill
+drill=1.5; //screwmount drill
 
 width= modelB ? 78 : 58;
-depth=8.6;
+depth=11.4;
 height=49;
 radius=3.5;
 $fn = 64; //number of faces on a circle
@@ -26,7 +27,7 @@ difference()
             }
             
             //carve hollow
-            translate([-radius+thickness,-radius+thickness,thickness+3])	//3mm filler on "top"
+            translate([-radius+thickness,-radius+thickness,thickness+5])	//3mm filler on "top"
                 cube([width+2*(radius-thickness),height+2*(radius-thickness),depth]);
         }
         
@@ -89,6 +90,13 @@ difference()
         //add slot for usb port
         translate([width-12+radius,height-15-(24-radius),depth-8])
             cube([12,15,8]);
+    }
+    
+    //additional hole for cooling?
+    if(hollow)
+    {
+        translate([58/2,height/2,0])
+            cylinder(depth,height*0.4,height*0.4);
     }
     
     //add slot for audio jack
