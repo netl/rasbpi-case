@@ -1,7 +1,9 @@
 modelB=true; //raspi model B?
 countersink = false; //countersink screwmount?
-hollow = false; //hollow out to save material and improve cooling?
+top = true; //solid top?
+components = true; //make room for components?
 thickness=1.2; //wall thickness
+extraThickness= 0; //additional thickness to top for added rigidity
 drill=1.5; //screwmount drill
 
 width= modelB ? 78 : 58;
@@ -27,7 +29,8 @@ difference()
             }
             
             //carve hollow
-            translate([-radius+thickness,-radius+thickness,thickness+5])	//3mm filler on "top"
+            a=top ? 1 : 0;
+            translate([-radius+thickness,-radius+thickness,a*(thickness+extraThickness)])
                 cube([width+2*(radius-thickness),height+2*(radius-thickness),depth]);
         }
         
@@ -71,61 +74,58 @@ difference()
                     if(countersink)
                         cylinder(drill,drill*2,drill);
                 }
-                
-     //make room for components
-     if(modelB)
+  
+     if(components)
      {
-         //add slot for usb ports
-         translate([width+radius-16,-radius+2,depth-16])
-            cube([16,14,16]);
-         translate([width+radius-16,-radius+20,depth-16])
-            cube([16,14,16]);
-         
-         //add slot for network
-         translate([width+radius-19.5,-radius+37.5,depth-16])
-            cube([19.5,17,16]);
-     }
-    else
-    {
-        //add slot for usb port
-        translate([width-12+radius,height-15-(24-radius),depth-8])
-            cube([12,15,8]);
+         //make room for components
+         if(modelB)
+         {
+             //add slot for usb ports
+             translate([width+radius-16,-radius+2,depth-16])
+                cube([16,14,16]);
+             translate([width+radius-16,-radius+20,depth-16])
+                cube([16,14,16]);
+             
+             //add slot for network
+             translate([width+radius-19.5,-radius+37.5,depth-16])
+                cube([19.5,17,16]);
+         }
+        else
+        {
+            //add slot for usb port
+            translate([width-12+radius,height-15-(24-radius),depth-8])
+                cube([12,15,8]);
+        }
+
+        
+        //add slot for audio jack
+        translate([42+radius,height-13+radius,depth-7])
+            cube([9,13,7]);
+        
+        //add slot for hdmi
+        translate([17.5+radius,height-12+radius,depth-7])
+            cube([16,12,7]);
+        
+        //add slot for usb power
+        translate([6-radius,height-6-(-radius),depth-3])
+            cube([10,6,3]);
+        
+        //add slot for status leds
+        translate([-radius,height-7-(43-radius),depth-1])
+            cube([2,7,1]);
+        
+        //add slot for connector
+        translate([-0.5+radius,height-7-(height-radius),0])
+            cube([52,7,depth]);
+        
+        //add slot for display header
+        translate([1-radius,height-24-(-radius+16),depth-7])
+            cube([5,24,7]);
+        
+        //add slot for camera header
+        translate([36+radius,height-23-(-radius),depth-6])
+            cube([5,23,6]);
     }
-    
-    //additional hole for cooling?
-    if(hollow)
-    {
-        translate([58/2,height/2,0])
-            cylinder(depth,height*0.4,height*0.4);
-    }
-    
-    //add slot for audio jack
-    translate([42+radius,height-13+radius,depth-7])
-        cube([9,13,7]);
-    
-    //add slot for hdmi
-    translate([17.5+radius,height-12+radius,depth-7])
-        cube([16,12,7]);
-    
-    //add slot for usb power
-    translate([6-radius,height-6-(-radius),depth-3])
-        cube([10,6,3]);
-    
-    //add slot for status leds
-    translate([-radius,height-7-(43-radius),depth-1])
-        cube([2,7,1]);
-    
-    //add slot for connector
-    translate([-0.5+radius,height-7-(height-radius),0])
-        cube([52,7,depth]);
-    
-	//add slot for display header
-    translate([1-radius,height-24-(-radius+16),depth-7])
-        cube([5,24,7]);
-    
-    //add slot for camera header
-    translate([36+radius,height-23-(-radius),depth-6])
-        cube([5,23,6]);
 }
 
    
